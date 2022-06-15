@@ -10,7 +10,7 @@ class Turtle {
   // 180 deg.      0 deg.
   //        90 deg.
   forward(steps) {
-    
+    this.resetAngle();
     for (let i = 0; i < steps; i++) {
       switch (this.angle) {
         case 0:
@@ -29,6 +29,16 @@ class Turtle {
       this.trackPoints.push([this.x, this.y]);
     }
     return this;
+  }
+
+  //make sure angel is between 0 - 360
+  resetAngle() {
+    if (this.angle >= 360) {
+      this.angle = this.angle % 360;
+    }
+    if (this.angle < 0) {
+      this.angle += 360;
+    }
   }
 
   right() {
@@ -67,7 +77,7 @@ class Turtle {
     let string = "";
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < columns; j++) {
-        string += this.isTrackPoint(j, i) ? "■" : "□";
+        string += this.isTrackPoint(j, i) ? "■ " : "□ ";
       }
       string += "\n";
     }
@@ -75,6 +85,18 @@ class Turtle {
     return this;
   }
 }
-const flash = new Turtle(0, 4).forward(3).left().forward(3).print();
-// console.log(flash.allPoints());
-// flash.print();
+new Turtle(0, 4)
+  .forward(3)
+  .left()
+  .forward(3)
+  .right()
+  .forward(5)
+  .right()
+  .forward(8)
+  .right()
+  .forward(5)
+  .right()
+  .forward(3)
+  .left()
+  .forward(3)
+  .print();
