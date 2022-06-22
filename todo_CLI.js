@@ -49,14 +49,14 @@ function fallback() {
 
 function handleView() {
   let todolistData = readTodoList();
-  if(todolistData > 0) {
+  if(todolistData.length > 0) {
     todolistData.forEach((item, index) => {
       console.log(
         index.toString() + ' [' + (item.complete ? '✓' : '') + '] ' + item.name
       );
     })
   } else {
-    console.log("The list is empty")
+    console.log("The list is empty");
   }
   todoStart()
 }
@@ -65,7 +65,7 @@ function handleNew() {
   readline.question("What?", (input) => {
     if(input) {
       let newList = readTodoList();
-      newList.push({name: input, complete: false})
+      newList.push({ name: input, complete: false })
       writeOrCreateFile(newList);
     } else {
       console.log("Invaild value")
@@ -80,7 +80,7 @@ function handleQuit() {
   readline.close();
 }
 
-function handleComplete() {
+function handleComplete(index) {
   let newList = readTodoList();
   if(index < newList.length && index >= 0 ) {
     newList[index].complete = true;
@@ -92,7 +92,7 @@ function handleComplete() {
   todoStart();
 }
 
-function handleDelete() {
+function handleDelete(index) {
   let newList = readTodoList();
   if(index < newList.length && index >= 0 ) {
     let newName = newList[index].name;
@@ -130,7 +130,7 @@ function handleAction(input) {
     if(!isNaN(userInput)) {
       //get the int of index
       let userInt = parseInt(userInput)
-      handleDelete(userInt)
+      handleDelete(userInput)
     } else {
       fallback();
     }
