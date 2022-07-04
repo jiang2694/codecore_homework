@@ -1,10 +1,10 @@
+const faker = require('faker');
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> } 
  */
 
 // allows us to use the faker library
-const faker = require('faker');
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
